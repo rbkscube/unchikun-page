@@ -1,0 +1,170 @@
+<style>
+  header {
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+  }
+
+  ul {
+    display: table;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    text-align: center;
+    font-weight:bold;
+    background: rgb(171, 110, 58);
+    border-radius: 0px 0px 50px 50px;
+  }
+
+  ul li {
+    display: table-cell;
+    min-width: 50px;
+    border-radius: 0px 0px 50px 50px;
+  }
+
+  ul li a {
+    display: block;
+    width: 100%;
+    padding: 10px 0;
+    text-decoration: none;
+    color: #fff;
+    font-size: 24px;
+    font-family: "M PLUS Rounded 1c" ,cursive;
+  }
+
+  ul li :hover {
+    background: rgb(131, 80, 35);
+    border-radius: 0px 0px 50px 50px;
+  }
+
+  #main {
+    width: 980px;
+    margin: 0 auto;
+    text-align: center;
+    font-family: "M PLUS Rounded 1c" ,cursive;
+  }
+
+  #icon {
+    padding: 32px;
+    width: 250px;
+    text-align: center;
+  }
+
+  #text_area {
+    border-radius: 0px 0px 50px 50px;
+    margin: 0;
+    background-color: #fdf5e6;
+    text-align: center;
+    font-size: 28px;
+  }
+
+  #title {
+    border-radius: 50px 50px 0px 0px;
+    background: rgb(171, 110, 58);
+    text-align: center;
+    margin: 0;
+    padding: 15px 0;
+    color: #fff;
+    font-size: 36px;
+  }
+
+  #unchikun {
+    text-align: center;
+    width: 300px;
+    padding: 30px 0;
+  }
+
+  #text {
+    text-align: center;
+    margin: 0;
+    padding: 0 0 30px 0;
+  }
+
+  footer {
+    font-size: 20px;
+    font-family:Yu Gothic;
+    text-align: center;
+  }
+
+  .liquor_pct_form {
+    padding: 10px 30px;
+  }
+  form dl dt {
+    width: 260px;
+    height: 40px;
+    padding: 10px 0;
+    line-height: 40px;
+    float: left;
+  }
+  form dl dd {
+    padding: 10px 0;
+    margin: 0;
+  }
+  .box {
+    box-sizing: border-box;
+    width: 100px !important;
+    height: 30px !important;
+    margin: 0 !important;
+    padding: 0 10px !important;
+  }
+  .calc-btn {
+    width: 80px;
+    height: 30px;
+  }
+</style>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>おさけけいさん</title>
+  <!--<link rel="stylesheet" type="text/css" href="https://rbkscube.github.io/unchikun-page/css/liquor_pct.css" />-->
+  <link rel="shortcut icon" href="https://rbkscube.github.io/unchikun-page/img/unc.ico">
+  <link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c" rel="stylesheet">
+</head>
+<body background="https://rbkscube.github.io/unchikun-page/img/header.png" id="main">
+  <header>
+    <ul>
+      <li><a href="./index.html">とっぷ</a></li>
+      <li><a href="./otoge.html">おとげー</a></li>
+      <li><a href="./music.html">おんがく</a></li>
+      <li><a href="./powerword.html">おさけけいさん</a></li>
+    </ul>
+  </header>
+  <img src="https://rbkscube.github.io/unchikun-page/img/icon-no-anti.png" id="icon">
+  <h1 id="title">おさけけいさん</h1>
+  <div id="text_area">
+    <form class="liquor_pct_form">
+      <h1>普段飲みのお酒のクオリティを<br>高めるヤツ</h1>
+      <p>氷の体積は考慮してないのでそこはいい感じに頼みます。</p>
+      <dl>
+        <dt>割材の度数：</dt>
+        <dd><input type="number" class="box" name="mixer_pct">%</dd>
+        <dt>割材の量：</dt>
+        <dd><input type="number" class="box" name="mixer_vol">ml</dd>
+        <dt>お酒の度数：</dt>
+        <dd><input type="number" class="box" name="liquor_pct">%</dd>
+        <dt>お酒の量：</dt>
+        <dd><input type="number" class="box" name="liquor_vol">ml</dd>
+        <p><input type="button" class="calc-btn" onclick="calc(mixer_pct.value, mixer_vol.value, liquor_pct.value, liquor_vol.value);" value="計算"></p>
+        <dt>全体の度数：</dt>
+        <dd><input id="total_pct" class="box" type="text" readonly="">%</dd>
+        <dt>全体量：</dt>
+        <dd><input id="total_vol" class="box" type="text" readonly="">ml</dd>
+        <dt>割材とお酒の比率：</dt>
+        <dd><input id="ratio" class="box" type="text" readonly=""></dd>
+      </dl>
+    </form>
+  </div>
+  <footer>
+    <p>Copyright © 2022 unchikun All Rights Non-reserved.</p>
+  </footer>
+</body>
+</html>
+<script>
+  function calc(mixer_pct, mixer_vol, liquor_pct, liquor_vol) {
+    const mixer_weight = mixer_pct * mixer_vol;
+    const liquor_weight = liquor_pct * liquor_vol;
+    const total_vol_value = document.getElementById('total_vol').value = parseInt(mixer_vol) + parseInt(liquor_vol);
+    const total_pct_value = document.getElementById('total_pct').value = (parseInt(mixer_weight) + parseInt(liquor_weight)) / total_vol_value;
+    const ratio_value = document.getElementById('ratio').value = "1 : " + mixer_vol / liquor_vol;
+  }
+</script>
